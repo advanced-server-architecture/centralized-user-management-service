@@ -1,0 +1,19 @@
+[31mError[39m in plugin '[36mwebpack-stream[39m'
+Message:
+    ./src/App.js
+Module not found: Error: Cannot resolve 'file' or 'directory' /stores/GlobalStore in /Users/Joesonw/yiyi/centralized-user-management-service/web/src
+resolve file
+  /stores/GlobalStore doesn't exist
+  /stores/GlobalStore.web.js doesn't exist
+  /stores/GlobalStore.webpack.js doesn't exist
+  /stores/GlobalStore.js doesn't exist
+  /stores/GlobalStore.json doesn't exist
+resolve directory
+  /stores/GlobalStore doesn't exist (directory default file)
+  /stores/GlobalStore/package.json doesn't exist (directory description file)
+[/stores/GlobalStore]
+[/stores/GlobalStore.web.js]
+[/stores/GlobalStore.webpack.js]
+[/stores/GlobalStore.js]
+[/stores/GlobalStore.json]
+ @ ./src/App.js 53:19-49

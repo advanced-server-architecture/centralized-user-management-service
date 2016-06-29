@@ -1,0 +1,41 @@
+{
+  "name": "user-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hitales/slb-app-server.git"
+  },
+  "author": "Qiaosen Huang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hitales/slb-app-server/issues"
+  },
+  "homepage": "https://github.com/hitales/slb-app-server#readme",
+  "dependencies": {
+    "app-module-path": "^1.0.6",
+    "chance": "^1.0.3",
+    "co": "^4.6.0",
+    "co-redis": "^2.1.0",
+    "joi": "^8.1.0",
+    "js2xmlparser": "^1.0.0",
+    "jsonwebtoken": "^7.0.1",
+    "koa": "^1.2.0",
+    "koa-bodyparser": "^2.2.0",
+    "koa-router": "^5.4.0",
+    "lodash": "^4.13.1",
+    "log4js": "^0.6.36",
+    "log4js-logstash": "^0.2.2",
+    "mongoose": "^4.4.19",
+    "redis": "^2.6.2",
+    "superagent": "^2.0.0"
+  },
+  "devDependencies": {
+    "inquirer": "^1.1.0",
+    "mongodb": "^2.1.18"
+  }
+}

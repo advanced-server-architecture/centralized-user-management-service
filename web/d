@@ -1,0 +1,20 @@
+[31mError[39m in plugin '[36mwebpack-stream[39m'
+Message:
+    ./builds/App.js
+Module build failed: SyntaxError: /Users/Joesonw/yiyi/centralized-user-management-service/web/builds/App.js: Unexpected token (11:8)
+[0m   9 | [32m}[39m
+  10 | 
+> 11 | ReactDom[1m.[22mrender[34m[1m([22m[39m[1m<[22mApp[1m/[22m[1m>[22m[1m,[22m document[1m.[22mgetElementById[34m[1m([22m[39m[31m'container'[39m[34m[1m)[22m[39m[34m[1m)[22m[39m[1m;[22m
+     |         ^
+  12 | [0m
+    at Parser.pp.raise (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/location.js:22:13)
+    at Parser.pp.unexpected (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/util.js:89:8)
+    at Parser.pp.expect (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/util.js:83:33)
+    at Parser.pp.parseMethod (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:893:8)
+    at Parser.parseClassMethod (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/plugins/flow.js:267:12)
+    at Parser.pp.parseClassBody (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/statement.js:788:10)
+    at Parser.pp.parseClass (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/statement.js:666:8)
+    at Parser.pp.parseStatement (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/statement.js:102:19)
+    at Parser.parseStatement (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/plugins/flow.js:30:22)
+    at Parser.pp.parseBlockBody (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/statement.js:529:21)
+ @ multi app
