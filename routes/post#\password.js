@@ -63,7 +63,7 @@ module.exports = [
             account: body.account,
         });
 
-        user.crendentials[index].secret = md5(`${config.CRYPT.SALT}-${body.newSecret}+${config.CRYPT.SALT}`);
+        user.credentials[index].secret = md5(`${config.CRYPT.SALT}-${body.newSecret}+${config.CRYPT.SALT}`);
         yield user.save();
 
         const filteredUser = filterUser(user, scope);
