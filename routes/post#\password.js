@@ -53,6 +53,7 @@ module.exports = [
         }
 
         user.secret = md5(`${config.CRYPT.SALT}-${body.newSecret}+${config.CRYPT.SALT}`)
+        yield user.save();
 
         const filteredUser = filterUser(user, scope);
 
