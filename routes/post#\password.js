@@ -42,7 +42,7 @@ module.exports = [
 
         user = yield User
                 .findOne({
-                    _id: user._id<
+                    _id: user._id,
                 })
                 .exec();
 
