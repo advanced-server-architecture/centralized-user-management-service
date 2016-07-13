@@ -25,7 +25,7 @@ module.exports = [
     requireSignature(),
     function* (next) {
         const body = this.request.body;
-        const user = (yield User
+        let user = (yield User
             .detail({
                 'credentials': {
                     $elemMatch: {
@@ -39,6 +39,12 @@ module.exports = [
         if (!user) {
             throw new Exception(E.AUTH.NO_USER_PASSWORD);
         }
+
+        user = yield User
+                .findOne({
+                    _id: user._id<
+                })
+                .exec();
 
         let scope = {}; 
         const app = yield Application
