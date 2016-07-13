@@ -6,12 +6,10 @@ const User = require('runtime/db').User;
 const _ = require('lodash');
 const requireSignature = require('middleware/requireSignature');
 const E = require('constant/E');
-const bodyParser = require('koa-bodyparser');
 
 const filterUser = require('util/filterUser');
 
 module.exports = [
-    bodyParser(),
     queryValidator({
         body: joi.object().unknown()
     }),

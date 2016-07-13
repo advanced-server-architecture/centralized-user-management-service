@@ -33,6 +33,7 @@ module.exports = {
 					cacheDirectory: true,
     				plugins: [
     					'transform-decorators-legacy',
+                        /*'transform-async-to-generator',*/
     					['antd', {
     						style: 'css'
     					}]

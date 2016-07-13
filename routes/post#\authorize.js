@@ -1,7 +1,6 @@
 'use strict';
 const joi = require('util/joi');
 const Exception = require('util/exception');
-const bodyParser = require('koa-bodyparser');
 const queryValidator = require('middleware/queryValidator');
 const {User, Application} = require('runtime/db');
 const config = require('config');
@@ -11,9 +10,9 @@ const jwt = require('jsonwebtoken');
 const redis = require('runtime/redis');
 const _ = require('lodash');
 const requireSignature = require('middleware/requireSignature');
+const filterUser = require('util/filterUser');
 
 module.exports = [
-    bodyParser(),
     queryValidator({
         body: joi.object({
             method: joi.string().allow('phone', 'username').required(),
@@ -54,27 +53,6 @@ module.exports = [
             };
         }
 
-        const roles = 
-            user.roles
-                .filter(r => r.scopeId.equals(scope.scopeId) || 
-                    r.scope === 'gloabl')
-                .map(r => _.extend({
-                    scopeName: r.scope === 'global' ? 
-                        null : scope.scopeName
-                }, r));
-
-        const permissions = 
-            user.permissions
-                .filter(p => p.scopeId.equals(scope.scopeId) || 
-                        p.scope === 'gloabl')
-                .map(p => _.extend({
-                    scopeName: p.scope === 'global' ? 
-                        null : scope.scopeName
-                }, p));
-
-        const profiles = 
-            user.profiles
-                .filter(p => p.application.equals(scope.scopeId));
 
         const expireAt = Date.now() + config.TOKEN.EXPIRE;
         const tokenKey = jwt.sign({
@@ -83,26 +61,26 @@ module.exports = [
             expiresIn: config.TOKEN.EXPIRE
         });
 
+
+        const filteredUser = filterUser(user, scope);
+
         const token = {
             _id: user._id.toString(),
             token: tokenKey,
             scope: JSON.stringify(scope),
-            roles: JSON.stringify(roles),
-            permissions: JSON.stringify(permissions),
-            profiles: JSON.stringify(profiles)
+            roles: JSON.stringify(filteredUser.roles),
+            permissions: JSON.stringify(filteredUser.permissions),
+            profiles: JSON.stringify(filteredUser.profiles)
         };
 
         const sessionKey = `${config.TOKEN.PREFIX}${token._id}`;
         yield redis.hmset(sessionKey, token);
 
+
         this.resolve({
             token: tokenKey,
             expireAt,
-            scope,
-            roles,
-            permissions,
-            profiles,
-            _id: token._id
+            user: filteredUser
         });
 
         yield next;

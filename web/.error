@@ -1,19 +1,22 @@
 [31mError[39m in plugin '[36mwebpack-stream[39m'
 Message:
     ./src/App.js
-Module not found: Error: Cannot resolve 'file' or 'directory' /stores/GlobalStore in /Users/Joesonw/yiyi/centralized-user-management-service/web/src
-resolve file
-  /stores/GlobalStore doesn't exist
-  /stores/GlobalStore.web.js doesn't exist
-  /stores/GlobalStore.webpack.js doesn't exist
-  /stores/GlobalStore.js doesn't exist
-  /stores/GlobalStore.json doesn't exist
-resolve directory
-  /stores/GlobalStore doesn't exist (directory default file)
-  /stores/GlobalStore/package.json doesn't exist (directory description file)
-[/stores/GlobalStore]
-[/stores/GlobalStore.web.js]
-[/stores/GlobalStore.webpack.js]
-[/stores/GlobalStore.js]
-[/stores/GlobalStore.json]
- @ ./src/App.js 53:19-49
+Module build failed: SyntaxError: /Users/Joesonw/yiyi/centralized-user-management-service/web/src/App.js: Unexpected token (34:9)
+[0m  32 | [36mclass[39m App [36mextends[39m React[1m.[22mComponent [32m{[39m
+  33 |     componentDidMount[34m[1m([22m[39m[34m[1m)[22m[39m [32m{[39m
+> 34 |         [7m@[27m[36mdebugger[39m[1m;[22m
+     |          ^
+  35 |         Misc[1m.[22mStatus[34m[1m([22m[39m[34m[1m)[22m[39m[1m;[22m
+  36 |     [32m}[39m
+  37 |     render[34m[1m([22m[39m[34m[1m)[22m[39m [32m{[39m[0m
+    at Parser.pp.raise (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/location.js:22:13)
+    at Parser.pp.unexpected (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/util.js:89:8)
+    at Parser.pp.parseExprAtom (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:522:12)
+    at Parser.parseExprAtom (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/plugins/jsx/index.js:18:22)
+    at Parser.pp.parseExprSubscripts (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:277:19)
+    at Parser.pp.parseMaybeUnary (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:257:19)
+    at Parser.pp.parseExprOps (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:188:19)
+    at Parser.pp.parseMaybeConditional (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:165:19)
+    at Parser.pp.parseMaybeAssign (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/parser/expression.js:128:19)
+    at Parser.parseMaybeAssign (/Users/Joesonw/yiyi/centralized-user-management-service/web/node_modules/babel-core/node_modules/babylon/lib/plugins/flow.js:454:20)
+ @ multi app

@@ -7,9 +7,9 @@ export default function(...stores) {
         }
         componentDidMount(...params) {
             this.__dispose = this.__dispose || [];
-            for (let Store of stores) {
-                this.__dispose.push(Store.subscribe(() => {
-                    if (Store.getState().get('__lastAction') === 'Load') {
+            for (const Store of stores) {
+                this.__dispose.push(Store.subscribe((action, state) => {
+                    if (!Store.getState()) {
                         return;
                     }
                     this.setState({__t: this.__t + 1});
@@ -23,7 +23,7 @@ export default function(...stores) {
             }
         }
         componentWillUnmount(...params) {
-            for (let dispose of this.__dispose) {
+            for (const dispose of this.__dispose) {
                 dispose();
             }
             if (super.componentWillUnmount) {

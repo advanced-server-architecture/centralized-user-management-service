@@ -8,29 +8,16 @@ const co = require('co');
 const _ = require('lodash');
 const routeLoader = require('util/routeLoader');
 const commonMiddleware = require('middleware/common');
-const requireAuthMiddleware = require('middleware/requireAuthMiddleware');
 const requestLoggingMiddleware = require('middleware/requestLoggingMiddleware');
-
+const sessionMiddleware = require('middleware/session');
+const bodyParser = require('koa-bodyparser');
 const app = koa();
 
 
+app.use(bodyParser());
 app.use(commonMiddleware);
-app.use(function* (next) {
-    try {
-        yield next;
-    } catch (e) {
-        if (e.runtime) {
-            this.reject(e.code, e.message, e.extra);
-        } else {
-            logger.error(e);
-            this.reject(500, 'Internal');
-        }
-    }
-});
-
-app.use(requireAuthMiddleware(
-    'POST /_admin/login'
-));
+app.use(requestLoggingMiddleware());
+app.use(sessionMiddleware(app));
 
 const router = routeLoader('./routes');
 
@@ -45,5 +32,3 @@ app.listen(config.HTTP_PORT, err => {
     }
     logger.info(`Server started on port:${config.HTTP_PORT}`);
 });
-
-require('websocket');

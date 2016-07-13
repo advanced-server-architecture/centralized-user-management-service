@@ -1,7 +1,6 @@
 'use strict';
 const joi = require('util/joi');
 const Exception = require('util/exception');
-const bodyParser = require('koa-bodyparser');
 const queryValidator = require('middleware/queryValidator');
 const User = require('runtime/db').User;
 const config = require('config');
@@ -13,7 +12,6 @@ const Chance = require('chance');
 const E = require('constant/E');
 
 module.exports = [
-    bodyParser(),
     queryValidator({
         body: joi.object({
             method: joi.string().allow('phone').required(),

@@ -31,6 +31,7 @@ module.exports = function* (next) {
     }
 
     this.send = (body) => {
+        body.requestId = this.requestId;
         switch (this.output_format) {
             case 'json':
                 this.type = 'json';
@@ -66,9 +67,11 @@ module.exports = function* (next) {
             error: [error]
         });
     };
-    this.set('Access-Control-Allow-Origin', this.headers['origin'] || '');
+    if (this.method === 'OPTIONS') {
+        this.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        this.set('Access-Control-Allow-Headers', 'Content-Type, Cookie');
+    }
     this.set('Access-Control-Allow-Credentials', 'true');
-    this.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    this.set('Access-Control-Allow-Headers', 'Content-Type, Cookie');
+    this.set('Access-Control-Allow-Origin', this.headers['origin'] || '');
     yield next;
 }

@@ -1,7 +1,6 @@
 'use strict';
 const joi = require('util/joi');
 const Exception = require('util/exception');
-const bodyParser = require('koa-bodyparser');
 const queryValidator = require('middleware/queryValidator');
 const requireSignature = require('middleware/requireSignature');
 const User = require('runtime/db').User;
@@ -13,7 +12,6 @@ const permissionValidator = require('middleware/permissionValidator');
 const {IF, AND, OR} = permissionValidator;
 
 module.exports = [
-    bodyParser(),
     queryValidator({
         params: joi.object({
             _id: joi.id()

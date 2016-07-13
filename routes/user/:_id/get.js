@@ -4,9 +4,9 @@ const Exception = require('util/exception');
 const queryValidator = require('middleware/queryValidator');
 const User = require('runtime/db').User;
 const _ = require('lodash');
-const requireSignature = require('middleware/requireSignature');
 const { ObjectId } = require('mongoose').Types;
 const filterUser = require('util/filterUser');
+const userMiddleware = require('routeMiddlewares/user');
 
 module.exports = [
     queryValidator({
@@ -14,7 +14,7 @@ module.exports = [
             _id: joi.id().required()
         })
     }),
-    requireSignature(),
+    ...userMiddleware,
     function* (next) {
         const scope = this.scope;
         const user = (yield User

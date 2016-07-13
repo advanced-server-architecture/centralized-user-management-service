@@ -1,23 +1,21 @@
 'use strict';
 const joi = require('util/joi');
 const Exception = require('util/exception');
-const bodyParser = require('koa-bodyparser');
 const queryValidator = require('middleware/queryValidator');
 const {User, Role} = require('runtime/db');
 const _ = require('lodash');
-const requireSignature = require('middleware/requireSignature');
 const E = require('constant/E');
 const filterUser = require('util/filterUser');
+const userMiddleware = require('routeMiddlewares/user');
 
 module.exports = [
-    bodyParser(),
     queryValidator({
         params: joi.object({
             _id: joi.id().required()
         }),
         body: joi.array(joi.id().required())
     }),
-    requireSignature(),
+    ...userMiddleware,
     function* (next) {
         const body = this.request.body;
         const scope = this.scope;

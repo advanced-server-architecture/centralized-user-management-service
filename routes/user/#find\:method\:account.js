@@ -32,8 +32,7 @@ module.exports = [
             throw new Exception(E.USER.NOT_FOUND);
         }
 
-        const filteredUser = filterUser(user, scope);
-        this.resolve(filteredUser);
+        this.resolve(user._id);
         yield next;
     }
 ]

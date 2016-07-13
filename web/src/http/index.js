@@ -1,14 +1,18 @@
-import Superagent from 'superagent';
-import { 
+import superagent from 'superagent';
+import {
 	baseUrl
 } from '../../config';
 
-let cookie = '';
+const methods = {
+    'del': 'DELETE',
+    'get': 'GET',
+    'put': 'PUT',
+    'post': 'POST'
+};
 
-
-const _Request = Superagent.Request;
-class PromisedRequest extends _Request {
-	constructor(method, url) {
+const _Request = superagent.Request;
+class Request extends _Request {
+    constructor(method, url) {
 		super(method, url);
 	}
 	end() {
@@ -20,7 +24,8 @@ class PromisedRequest extends _Request {
 					reject(err);
 				} else {
 					const body = res.body;
-					if (body.error) {
+					if (body.error &&
+                        body.error.length > 0) {
 						reject(body.error[0]);
 					} else {
 						resolve(body.data);
@@ -28,55 +33,31 @@ class PromisedRequest extends _Request {
 				}
 			});
 		});
-	}	
-	auth(token) {
-		this.set('X-Authorization-Token', token);
-		return this;	
 	}
 	then(resolve) {
 		return this.end().then(resolve);
 	}
-	static options(url) {
-		url = url.substr(0, 1) === '/' ? url : '/' + url;
-		return new PromisedRequest('OPTIONS', baseUrl + url);
-	}
-	static get(url, data) {
-		url = url.substr(0, 1) === '/' ? url : '/' + url;
-		let req = new PromisedRequest('GET', baseUrl + url);
-		if (data) {
-			req = req.send(data);
-		}
-		return req.withCredentials();
-	}
-	static post(url, data) {
-		url = url.substr(0, 1) === '/' ? url : '/' + url;
-		let req = new PromisedRequest('POST', baseUrl + url);
-		if (data) {
-			req = req.send(data);
-		}
-		return req.withCredentials();
-	}
-	static put(url, data) {
-		url = url.substr(0, 1) === '/' ? url : '/' + url;
-		let req = new PromisedRequest('PUT', baseUrl + url);
-		if (data) {
-			req = req.send(data);
-		}
-		return req.withCredentials();
-	}
-	static patch(url, data) {
-		url = url.substr(0, 1) === '/' ? url : '/' + url;
-		let req = new PromisedRequest('PATCH', baseUrl + url);
-		if (data) {
-			req = req.send(data);
-		}
-		return req;
-	}
-	static delete(url, data) {
-		url = url.substr(0, 1) === '/' ? url : '/' + url;
-		return new PromisedRequest('DELETE', baseUrl + url);
-	}
 }
-Superagent.Request = PromisedRequest;
 
-export default PromisedRequest;
+function prefix(url) {
+    return function(request) {
+        if (request.url[0] === '/') {
+            request.url = prefix + request.url;
+        }
+    }
+}
+
+for (const method in methods) {
+    Request[method] = function(url) {
+        if (url[0] === '/') {
+            url = baseUrl + url;
+        }
+        let req = new Request(methods[method], url);
+        return req.withCredentials();
+    }
+}
+
+
+superagent.Request = Request;
+
+export default Request;

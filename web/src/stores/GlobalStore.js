@@ -1,22 +1,18 @@
-import {
-    createStore
-} from 'redux';
+import createStore from 'createStore';
 
 import {
-    Map, 
+    Map,
     fromJS
 } from 'immutable';
 
 import {
     message
 } from 'antd';
-import http from '../http'; 
+import http from '../http';
 import logger from '../logger';
 
 const defaultState = Map({
-    loading: 0,
-    lastAction: Map({}),
-    userId: null
+    loading: 0
 });
 
 const GlobalStore = createStore(function(state = defaultState, action) {
@@ -25,8 +21,6 @@ const GlobalStore = createStore(function(state = defaultState, action) {
             return state.set('loading', state.get('loading') + 1);
         case 'Loaded':
             return state.set('loading', state.get('loading') - 1);
-        case 'SetLastAction':
-            return state.set('lastAction', fromJS(action.action));
         default:
             return state;
     }
