@@ -9,12 +9,6 @@ const config = require('config');
 
 module.exports = function() {
     return function* (next) {
-        const mongoose = require('mongoose');
-        this. scope = {
-            scope: 'application',
-            scopeId: new mongoose.Types.ObjectId('577202b6fca11a8e28a9cb4d')
-        };
-        return yield next;
         const params = this.params;
         const query = this.query;
         const body = this.request.body;
